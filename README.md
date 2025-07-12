@@ -21,7 +21,7 @@ http://localhost:8080/test-rules.html
 Monitor threats in real-time with enterprise-grade interface:
 
 ```
-http://localhost:8080/dashboard.html
+http://localhost:8080
 Login: admin / admin123
 ```
 
@@ -88,7 +88,7 @@ The system consists of the following components:
    ```
 
 4. **Access the system**
-   - **Security Dashboard**: `http://localhost:8080/dashboard.html`
+   - **Security Dashboard**: `http://localhost:8080`
    - **Rule Testing Suite**: `http://localhost:8080/test-rules.html`
    - Login with default credentials:
      - Username: `admin`
