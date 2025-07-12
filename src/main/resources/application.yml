@@ -1,0 +1,95 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: ecc-ids-ips
+  
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:idsips}
+    driver-class-name: ${DATABASE_DRIVER:org.h2.Driver}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:password}
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# IDS/IPS Configuration
+idsips:
+  security:
+    jwt:
+      secret: ${JWT_SECRET:mySecretKey123456789012345678901234567890}
+      expiration: ${JWT_EXPIRATION:3600000} # 1 hour in milliseconds
+    ecc:
+      key-size: ${ECC_KEY_SIZE:256}
+      algorithm: ${ECC_ALGORITHM:secp256r1}
+      aes-key-length: ${ECC_AES_KEY_LENGTH:16} # AES key length in bytes
+      ephemeral-key-length: ${ECC_EPHEMERAL_KEY_LENGTH:91} # Ephemeral key length for secp256r1
+    users:
+      admin:
+        username: ${ADMIN_USERNAME:admin}
+        password: ${ADMIN_PASSWORD:admin123}
+      operator:
+        username: ${OPERATOR_USERNAME:operator}
+        password: ${OPERATOR_PASSWORD:operator123}
+  
+  sensor:
+    enabled: ${SENSOR_ENABLED:true}  # Enable sensor
+    interface: ${SENSOR_INTERFACE:any} # Network interface to monitor
+    capture-timeout: ${SENSOR_CAPTURE_TIMEOUT:1000} # milliseconds
+    buffer-size: ${SENSOR_BUFFER_SIZE:65536}
+    simulation:
+      enabled: ${SENSOR_SIMULATION_ENABLED:true}  # Enable simulation as fallback
+      packet-interval: ${SENSOR_SIMULATION_INTERVAL:2000} # Generate packets every 2 seconds
+      max-packet-size: ${SENSOR_MAX_PACKET_SIZE:1500}
+      min-packet-size: ${SENSOR_MIN_PACKET_SIZE:64}
+      generate-alerts: ${SENSOR_GENERATE_ALERTS:true}  # Generate realistic security alerts
+  
+  detection:
+    enabled: ${DETECTION_ENABLED:true}
+    rules-file: ${DETECTION_RULES_FILE:classpath:detection-rules.json}
+    max-alerts-per-minute: ${DETECTION_MAX_ALERTS_PER_MINUTE:100}
+  
+  prevention:
+    enabled: ${PREVENTION_ENABLED:true}
+    auto-block: ${PREVENTION_AUTO_BLOCK:true}
+    block-duration: ${PREVENTION_BLOCK_DURATION:3600} # seconds (1 hour)
+
+  # User-friendly features
+  user:
+    friendly-mode: ${USER_FRIENDLY_MODE:true} # Enable user-friendly messages
+    auto-open-dashboard: ${AUTO_OPEN_DASHBOARD:false} # Auto-open browser on startup
+    show-welcome-message: ${SHOW_WELCOME_MESSAGE:true} # Show welcome message
+    notifications:
+      enabled: ${NOTIFICATIONS_ENABLED:true} # Enable system notifications
+      sound: ${NOTIFICATIONS_SOUND:false} # Play sound on alerts
+
+  # Dashboard customization
+  dashboard:
+    title: "ECC-IDS-IPS Security Monitor"
+    theme: "professional" # professional, dark, light
+    auto-refresh: ${DASHBOARD_AUTO_REFRESH:5000} # milliseconds
+    show-tips: ${DASHBOARD_SHOW_TIPS:true} # Show helpful tips
+
+# Logging Configuration
+logging:
+  level:
+    com.security.idsips: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/idsips.log

@@ -1,0 +1,150 @@
+[
+  {
+    "rule_id": "RULE_001",
+    "name": "Port Scanning Detection",
+    "description": "Detects aggressive port scanning activity indicating reconnaissance",
+    "severity": "HIGH",
+    "alert_type": "PORT_SCAN",
+    "enabled": true,
+    "conditions": {
+      "port_ranges": [
+        {"start": 1, "end": 1024},
+        {"start": 3389, "end": 3389},
+        {"start": 5900, "end": 5900}
+      ],
+      "protocols": ["TCP"]
+    },
+    "thresholds": {
+      "connections_per_minute": 50
+    }
+  },
+  {
+    "rule_id": "RULE_002",
+    "name": "Brute Force Detection",
+    "description": "Detects sustained brute force attacks on authentication services",
+    "severity": "CRITICAL",
+    "alert_type": "BRUTE_FORCE",
+    "enabled": true,
+    "conditions": {
+      "port_ranges": [
+        {"start": 22, "end": 22},
+        {"start": 21, "end": 21},
+        {"start": 3389, "end": 3389},
+        {"start": 1433, "end": 1433},
+        {"start": 3306, "end": 3306}
+      ],
+      "protocols": ["TCP"]
+    },
+    "thresholds": {
+      "failed_attempts": 25
+    }
+  },
+  {
+    "rule_id": "RULE_003",
+    "name": "Malicious Payload Detection",
+    "description": "Detects known attack patterns in network traffic",
+    "severity": "CRITICAL",
+    "alert_type": "MALICIOUS_PAYLOAD",
+    "enabled": true,
+    "conditions": {
+      "payload_patterns": [
+        ".*<script[^>]*>.*</script>.*",
+        ".*(union|UNION).*(select|SELECT).*",
+        ".*(cmd|CMD).*(exe|EXE).*",
+        ".*eval\\s*\\(.*\\).*",
+        ".*(DROP|drop)\\s+(TABLE|table).*",
+        ".*(/etc/passwd|/etc/shadow).*",
+        ".*(powershell|cmd)\\s+-.*"
+      ]
+    }
+  },
+  {
+    "rule_id": "RULE_004",
+    "name": "Data Exfiltration Detection",
+    "description": "Detects potential data exfiltration through unusually large transfers",
+    "severity": "HIGH",
+    "alert_type": "SUSPICIOUS_TRAFFIC",
+    "enabled": true,
+    "conditions": {
+      "packet_size_min": 8192
+    },
+    "thresholds": {
+      "large_packets_per_minute": 10
+    }
+  },
+  {
+    "rule_id": "RULE_005",
+    "name": "Known Malicious IP Detection",
+    "description": "Detects traffic from known malicious IP addresses and botnets",
+    "severity": "CRITICAL",
+    "alert_type": "SUSPICIOUS_TRAFFIC",
+    "enabled": true,
+    "conditions": {
+      "source_ip_patterns": [
+        "185\\.220\\..*\\..*",
+        "91\\.240\\..*\\..*",
+        "194\\.87\\..*\\..*",
+        "192\\.168\\.999\\..*"
+      ]
+    }
+  },
+  {
+    "rule_id": "RULE_006",
+    "name": "DDoS Attack Detection",
+    "description": "Detects distributed denial of service attack patterns",
+    "severity": "CRITICAL",
+    "alert_type": "DDoS_ATTACK",
+    "enabled": true,
+    "conditions": {
+      "port_ranges": [
+        {"start": 80, "end": 80},
+        {"start": 443, "end": 443},
+        {"start": 53, "end": 53}
+      ],
+      "protocols": ["TCP", "UDP"]
+    },
+    "thresholds": {
+      "connections_per_minute": 500,
+      "unique_sources_threshold": 50
+    }
+  },
+  {
+    "rule_id": "RULE_007",
+    "name": "Lateral Movement Detection",
+    "description": "Detects potential lateral movement within the network",
+    "severity": "HIGH",
+    "alert_type": "UNAUTHORIZED_ACCESS",
+    "enabled": true,
+    "conditions": {
+      "port_ranges": [
+        {"start": 135, "end": 139},
+        {"start": 445, "end": 445},
+        {"start": 5985, "end": 5986}
+      ],
+      "protocols": ["TCP"]
+    },
+    "thresholds": {
+      "connections_per_minute": 20,
+      "different_targets": 5
+    }
+  },
+  {
+    "rule_id": "RULE_008",
+    "name": "Cryptocurrency Mining Detection",
+    "description": "Detects unauthorized cryptocurrency mining activity",
+    "severity": "MEDIUM",
+    "alert_type": "SUSPICIOUS_TRAFFIC",
+    "enabled": true,
+    "conditions": {
+      "port_ranges": [
+        {"start": 4444, "end": 4444},
+        {"start": 8333, "end": 8333},
+        {"start": 9999, "end": 9999}
+      ],
+      "protocols": ["TCP"]
+    },
+    "thresholds": {
+      "connections_per_minute": 10
+    }
+  }
+]
