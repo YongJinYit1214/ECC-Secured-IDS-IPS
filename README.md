@@ -1,8 +1,31 @@
-# ECC-Secured IDS/IPS System
+# 🛡️ ECC-Secured IDS/IPS System
 
-A production-ready Intrusion Detection and Prevention System (IDS/IPS) with advanced Elliptic Curve Cryptography (ECC) encryption, designed for enterprise-grade threat monitoring and automated response.
+[![Java](https://img.shields.io/badge/Java-17+-orange.svg)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2+-green.svg)](https://spring.io/projects/spring-boot)
+[![Security](https://img.shields.io/badge/Security-ECC%20Encryption-blue.svg)](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Testing](https://img.shields.io/badge/Testing-Web%20Based-purple.svg)](http://localhost:8080/test-rules.html)
 
-## 🔒 Features
+A **production-ready** Intrusion Detection and Prevention System (IDS/IPS) with advanced **Elliptic Curve Cryptography (ECC)** encryption, designed for enterprise-grade threat monitoring and automated response. Features **web-based rule testing** and **zero false positive** detection.
+
+## 🚀 **Quick Demo**
+
+### **Web-Based Rule Testing Suite**
+Test all 8 detection rules with simple button clicks - no terminal commands needed!
+
+```
+http://localhost:8080/test-rules.html
+```
+
+### **Professional Security Dashboard**
+Monitor threats in real-time with enterprise-grade interface:
+
+```
+http://localhost:8080/dashboard.html
+Login: admin / admin123
+```
+
+## 🔒 **Key Features**
 
 ### 🛡️ Production-Grade Security
 - **Real-time Network Monitoring**: Live packet capture using Npcap with enterprise-grade performance
@@ -50,8 +73,8 @@ The system consists of the following components:
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd ecc-ids-ips
+   git clone https://github.com/YongJinYit1214/ECC-Secured-IDS-IPS.git
+   cd ECC-Secured-IDS-IPS
    ```
 
 2. **Build the application**
@@ -64,11 +87,35 @@ The system consists of the following components:
    mvn spring-boot:run
    ```
 
-4. **Access the dashboard**
-   - Open your browser to `http://localhost:8080`
+4. **Access the system**
+   - **Security Dashboard**: `http://localhost:8080/dashboard.html`
+   - **Rule Testing Suite**: `http://localhost:8080/test-rules.html`
    - Login with default credentials:
      - Username: `admin`
      - Password: `admin123`
+
+## 🧪 **Web-Based Rule Testing** (No Terminal Commands!)
+
+### **Test All 8 Detection Rules with Simple Button Clicks**
+
+Access the testing suite at: `http://localhost:8080/test-rules.html`
+
+**Available Tests:**
+- 🔍 **Port Scanning Detection** - Simulates aggressive port scanning
+- 🔐 **Brute Force Detection** - Tests authentication attack detection
+- 💀 **Malicious Payload Detection** - Tests SQL injection, XSS, command injection
+- 📤 **Data Exfiltration Detection** - Tests large data transfer monitoring
+- 🌐 **Known Malicious IP Detection** - Tests threat intelligence blocking
+- ⚡ **DDoS Attack Detection** - Tests distributed attack identification
+- 🔄 **Lateral Movement Detection** - Tests network reconnaissance detection
+- ⛏️ **Cryptocurrency Mining Detection** - Tests unauthorized mining detection
+
+**Features:**
+- ✅ **One-click testing** for each rule
+- ✅ **Real-time status updates** with visual feedback
+- ✅ **Auto-sequence option** to test all rules automatically
+- ✅ **Production-realistic thresholds** - same as real threats
+- ✅ **Generates actual alerts** in the security dashboard
 
 ## 🚀 Enhanced Setup for Real Network Monitoring
 
